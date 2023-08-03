@@ -1,17 +1,29 @@
 #include <iostream>
 #include <format>
 #include <functional>
+#include <limits>
 
 int main()
 {
 	const std::function<int(const std::string&)> getIntByInput = [](const std::string& text = "") -> int
 	{
-		std::string t;
-		if (text != "")
-			std::cout << text;
+		int t;
 
-		std::getline(std::cin, t);
-		return std::stoi(t);
+		while (true)
+		{
+			if (text != "")
+				std::cout << text;
+
+			std::cin >> t;
+
+			if (std::cin.fail())
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
+			else
+				return t;
+		}
 	};
 
 	int people = getIntByInput("How many people? ");
