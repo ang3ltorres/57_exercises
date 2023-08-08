@@ -1,0 +1,1 @@
+cls && cl /std:c++20 /Od /EHsc main.cpp && main.exe
